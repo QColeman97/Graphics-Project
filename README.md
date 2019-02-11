@@ -24,7 +24,7 @@ radius. The sports car revolves on top of a spinning cylindrical
 platform, and exhibits headlights that are brightly-lit objects
 themselves. Now let's get into what this project is about.
 
-Distinguishing features:
+Main features:
 
 -   3D Sports Car Model
 -   Randomly-Generated Rooms
