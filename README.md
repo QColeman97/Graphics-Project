@@ -5,13 +5,12 @@ Supercar Showroom
 
 ### Overview
 
-![](dark_title.png)
+![](readme_pics/dark_title.png)
 
-\
 
 For my quarter project in CSC 471, Introduction to Computer Graphics, I
 was inspired by a racing-simulator video game called "Gran Turismo,"
-mainly for its interactive and beautiful renderings of cars. In the car
+mainly for its interactive and pretty renderings of cars. In the car
 dealership in Gran Turismo, players are allowed to select any sports car
 for viewing mode inside a showroom. I wanted to create a sports car
 showroom experience like this that a player can manually move around
@@ -23,8 +22,7 @@ system. This collision detection system is based upon the camera's
 radius in relation to the room's radius as well as the supercar's
 radius. The sports car revolves on top of a spinning cylindrical
 platform, and exhibits headlights that are brightly-lit objects
-themselves. Now let's get into the distinguishing features of my
-project.
+themselves. Now let's get into what this project is about.
 
 Distinguishing features:
 
@@ -46,9 +44,9 @@ I had to manually delete a section of the OBJ file, as it correlated to
 a sub-object that encapsulated the car like a shell, which hid most of
 the model's details when included.
 
-![](obj.png) *Lamborghini Aventador LP 750-4 Superveloce OBJ Model*
+![](readme_pics/obj.png) *Lamborghini Aventador LP 750-4 Superveloce OBJ Model*
 
-![](tex.jpeg) *Lamborghini Aventador LP 750-4 Superveloce Texture*
+![](readme_pics/tex.jpeg) *Lamborghini Aventador LP 750-4 Superveloce Texture*
 
 ### Randomly-Generated Rooms
 
@@ -58,7 +56,7 @@ I created a 5x4 2D array to contain all information needed for the
 possible rooms in which locations that could exist. I pound-defined
 constants to convey all possible door-arrangements for any value inside
 this array. I kept the random-generation simple for realism and only
-made one layer of random-generation from the starting room.
+made one "layer" of random-generation from the starting room.
 
 #### Geometry
 
@@ -68,7 +66,7 @@ vertex array object (VAO) with enough vertices for 3 possible rooms:
 correct room from the VAO, and matrix transformations to arrange the
 room appropriately to its location.
 
-![](rooms.png) *The showroom end product*
+![](readme_pics/rooms.png) *The showroom end product*
 
 ### Shadow-Mapping
 
@@ -93,7 +91,7 @@ would be expected. More work needs to be done to make sure that all
 objects of interest in my scene are getting the light exposure needed
 for correct shadow-mapping.
 
-![](shadow.png) *The showroom end product*
+![](readme_pics/shadow.png) *The showroom end product*
 
 ### Day/Night - Light Mode
 
@@ -104,9 +102,9 @@ specular light in day-light mode. In night-light mode, I decrease the
 lighting of the surrounding rooms, take away the specular lighting from
 the rooms and increase specular light for the cars for dramatic effect.
 
-![](right_face_day.png) *Day-Light Mode*
+![](readme_pics/right_face_day.png) *Day-Light Mode*
 
-![](right_face_night.png) *Night-Light Mode*
+![](readme_pics/right_face_night.png) *Night-Light Mode*
 
 ### End Product
 
@@ -117,11 +115,7 @@ models to the showroom, add emitting light from the headlights, add more
 lighting modes, fix a collision response bug, add a user interface, and
 add a sky-box that can be seen through new windows within the walls.
 
-![](title.png) *The end product*
-
-### Download Project
-
--   [supercar\_showroom.zip](supercar_showroom.zip)
+![](readme_pics/title.png) *The end product*
 
 ### Resources
 
