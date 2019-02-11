@@ -1,0 +1,261 @@
+<html>
+<head>
+  <title>Showroom</title>
+
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: white;
+      color: #333333;
+      -webkit-font-smoothing: antialiased;
+      font-size: 16px;
+      font-family: "Source Sans Pro", Helvetica;
+    }
+
+    img {
+      display: block;
+    }
+
+    em {
+      font-size: 12px;
+    }
+
+    #signature {
+      margin-left: 30px;
+      font-style: oblique;
+    }
+
+    a:link,
+    a:visited {
+      color: #165788;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus,
+    a:active {
+      text-decoration: underline;
+    }
+
+    .wrapper {
+      width: 660px;
+      margin: auto;
+    }
+
+    .container {
+      width: 660px;
+      margin: auto;
+    }
+
+    #content {
+      width: 650px;
+      margin: 70px auto 0px auto;
+    }
+
+    #content article {
+      margin-bottom: 150px;
+    }
+
+    #content h1,
+    #content h2 {
+      color: black;
+      margin-bottom: 30px;
+      font-weight: 200;
+      font-size: 48px;
+    }
+
+    #content h3 {
+      color: black;
+      border-bottom: 1px solid black;
+      text-transform: uppercase;
+      margin: 30px 0px 30px 0px;
+      font-size: 28px;
+      font-weight: 200;
+    }
+
+    #content p {
+      width: 100%;
+      line-height: 150%;
+      margin-bottom: 20px;
+    }
+
+    #content p:first-child {
+      font-size: 18px;
+      font-style: italic;
+      letter-spacing: 2px;
+    }
+
+    #content p:first-child:first-line {
+        font-weight: bold;
+    }
+  
+    #content ul {
+        padding-left:25px
+    }
+
+    pre {
+      font-size: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #ddd;
+    }
+  </style>
+</head>
+
+<body><div class="wrapper"><section id="content">
+
+<h1>Supercar Showroom</h1>
+
+<h4>Quinn Coleman - CSC 471 - Spring 2018 - Christian Eckhardt</h4>
+
+<article> <!-- This adds padding at the top and bottom -->
+
+
+
+
+<h3>Overview</h3>
+
+<!-- A Centered image -->
+<center>
+  <a>
+    <img src="dark_title.png" width="50%">
+  </a>
+</center>
+<br />
+<p>For my quarter project in CSC 471, Introduction to Computer Graphics, 
+I was inspired by a racing-simulator video game called "Gran Turismo," 
+mainly for its interactive and beautiful renderings of cars. 
+In the car dealership in Gran Turismo, players are allowed to select any sports car for viewing mode inside a showroom. 
+I wanted to create a sports car showroom experience like this that a player can manually move around within for themselves, while adding more features. </p>
+
+<p>To begin, the player can move around the space with the WASD keys, and cannot walk into the cars nor the walls with a collision detection system. 
+This collision detection system is based upon the camera's radius in relation to the room's radius as well as the supercar's radius. 
+The sports car revolves on top of a spinning cylindrical platform, and exhibits headlights that are brightly-lit objects themselves. 
+Now let's get into the distinguishing features of my project.</p>
+
+<p>Distinguishing features:
+  <ul>
+    <li>3D Sports Car Model</li>
+    <li>Randomly-Generated Rooms</li>
+    <li>Shadow-Mapping</li>
+    <li>Day/Night - Light Mode</li>
+  </ul>
+</p>
+
+
+<h3>The 3d Model</h3>
+<p>I downloaded a free low-poly OBJ model of a Lamborghini Aventador LP 570-4 Superveloce, from a 3D model internet source linked below. 
+I used the material file it came with in the Shape class to generate the textures for the car. </p>
+<h4>OBJ Shell Issue</h4>
+<p>I had to manually delete a section of the OBJ file, 
+as it correlated to a sub-object that encapsulated the car like a shell, 
+which hid most of the model's details when included.</p>
+
+
+<!-- A Centered image -->
+<center>
+  <a>
+    <img src="obj.png" width="50%">
+  </a>
+  <em>Lamborghini Aventador LP 750-4 Superveloce OBJ Model</em>
+</center>
+
+<!-- A Centered image -->
+<center>
+  <a>
+    <img src="tex.jpeg" width="50%">
+  </a>
+  <em>Lamborghini Aventador LP 750-4 Superveloce Texture</em>
+</center>
+
+<h3>Randomly-Generated Rooms</h3>
+<h4>Data Structure</h4>
+<p>I created a 5x4 2D array to contain all information needed for the possible rooms in which locations that could exist. 
+I pound-defined constants to convey all possible door-arrangements for any value inside this array. 
+I kept the random-generation simple for realism and only made one layer of random-generation from the starting room.</p>
+<h4>Geometry</h4>
+<p>In order to properly create doorways between rooms, I filled the room vertex array object (VAO) with enough vertices for 3 possible rooms: 3-door, 2-door and 1-door arrangments. 
+I later used offsets to draw the correct room from the VAO, and matrix transformations to arrange the room appropriately to its location.</p>
+
+<!-- A Centered image -->
+<center>
+  <a>
+    <img src="rooms.png" width="50%">
+  </a>
+  <em>The showroom end product</em>
+</center>
+
+<h3>Shadow-Mapping</h3>
+<h4>Step 1) Render to Framebuffer</h4>
+<p>I duplicated my render function, for a total of two render calls per frame. The first render call was made to render the entire scene from the perspective of the light source, into a depth-map texture by using a framer buffer.
+This texture contained dark red pixels for closer objects, and light red pixels for further ones.</p>
+<h4>Step 2) Render to Screen</h4>
+<p>I then used the depth-map texture to render the scene to the screen, while taking the depth into account to see which objects are obscured by others, and thus colored as if in shadows.</p>
+<h4>Issues</h4>
+<p>While I achieved a dynamic shadowing, the shadows are not displayed as would be expected. 
+More work needs to be done to make sure that all objects of interest in my scene are getting the light exposure needed for correct shadow-mapping.</p>
+
+<!-- A Centered image -->
+<center>
+  <a>
+    <img src="shadow.png" width="50%">
+  </a>
+  <em>The showroom end product</em>
+</center>
+
+<h3>Day/Night - Light Mode</h3>
+<p>I pass a uniform variable, that is changed upon each "L" key press, into my shaders to adjust the lighting appropriately. 
+Thus, in effect all object get a standard and uniform amount of ambient, diffuse and specular light in day-light mode. 
+In night-light mode, I decrease the lighting of the surrounding rooms, take away the specular lighting from the rooms and increase specular light for the cars for dramatic effect.</p>
+
+<!-- A Centered image -->
+<center>
+  <a>
+    <img src="right_face_day.png" width="50%">
+  </a>
+  <em>Day-Light Mode</em>
+</center>
+
+<!-- A Centered image -->
+<center>
+  <a>
+    <img src="right_face_night.png" width="50%">
+  </a>
+  <em>Night-Light Mode</em>
+</center>
+
+<h3>End Product</h3>
+<p>I was happy to see my project achieve its technical goals, and I would like to keep refining it. 
+For the future, I would like to fix the positioning of shadows to be more realistic and subtle, 
+add more car models to the showroom, 
+add emitting light from the headlights, 
+add more lighting modes, 
+fix a collision response bug,
+add a user interface,
+and add a sky-box that can be seen through new windows within the walls. 
+<!-- A Centered image -->
+<center>
+  <a>
+    <img src="title.png" width="50%">
+  </a>
+  <em>The end product</em>
+</center>
+
+<h3>Download Project</h3>
+<ul>
+  <li><a href="supercar_showroom.zip" download>supercar_showroom.zip</a></li>
+</ul>
+
+<h3>Resources</h3>
+<ul>
+  <li><a href="https://www.gran-turismo.com/us/">Gran Turismo Offical Site</a></li>
+  <li><a href="https://www.turbosquid.com/3d-models/3d-lamborghini-aventador-model/1117798">Lamborghini Aventador 3D Model</a></li>
+</ul>
+
+</article></section></div></body></html>
